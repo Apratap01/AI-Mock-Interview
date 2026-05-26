@@ -13,5 +13,24 @@ model User {
   email        String   @unique
   password     String
   refreshToken String?
+  resumes      Resume[]
   createdAt    DateTime @default(now())
+}
+
+model Resume {
+
+  id Int @id @default(autoincrement())
+
+  title String?
+
+  pdfUrl String
+
+  extractedText String @db.Text
+
+  userId Int
+
+  user User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+
 }
